@@ -107,6 +107,7 @@ class HomeComponentState extends State<HomeComponent> {
           "pop-result"),
       menuButton(context, 'assets/images/ic_function_hz.png', "Function Call",
           "function-call"),
+      menuButton(context, 'assets/images/logo_fluro.png', "[NEW] Route Settings Arguments", "arguments"),
     ];
 
     final size = MediaQuery.of(context).size;
@@ -204,6 +205,8 @@ class HomeComponentState extends State<HomeComponent> {
     String result;
     TransitionType transitionType = TransitionType.native;
     if (key != "custom" && key != "function-call" && key != "fixed-trans") {
+      Object arg;
+
       if (key == "native") {
         hexCode = "#F76F00";
         message =
@@ -223,6 +226,8 @@ class HomeComponentState extends State<HomeComponent> {
         message =
             "When you close this screen you should see the current day of the week";
         result = "Today is ${_daysOfWeek[DateTime.now().weekday - 1]}!";
+      } else if (key == "arguments") {
+        arg = Text('This widget was passed as argument.');
       }
 
       String route = "/demo?message=$message&color_hex=$hexCode";
@@ -232,7 +237,7 @@ class HomeComponentState extends State<HomeComponent> {
       }
 
       Application.router
-          .navigateTo(context, route, transition: transitionType)
+          .navigateTo(context, route, transition: transitionType, arguments: arg)
           .then((result) {
         if (key == "pop-result") {
           Application.router.navigateTo(context, "/demo/func?message=$result");
