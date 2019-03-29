@@ -13,7 +13,8 @@ class DemoSimpleComponent extends StatelessWidget {
   DemoSimpleComponent(
       {String message = "Testing",
       Color color = const Color(0xFFFFFFFF),
-      String result})
+      String result,
+      this.include})
       : this.message = message,
         this.color = color,
         this.result = result;
@@ -21,6 +22,7 @@ class DemoSimpleComponent extends StatelessWidget {
   final String message;
   final Color color;
   final String result;
+  final Widget include;
 
   @override
   Widget build(BuildContext context) {

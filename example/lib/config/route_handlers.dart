@@ -14,12 +14,12 @@ import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 
 var rootHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    handlerFunc: (BuildContext context, Map<String, List<String>> params, Object arguments) {
   return HomeComponent();
 });
 
-var demoRouteHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+var demoRouteHandler = new Handler(handlerFunc:
+    (BuildContext context, Map<String, List<String>> params, Object arguments) {
   String message = params["message"]?.first;
   String colorHex = params["color_hex"]?.first;
   String result = params["result"]?.first;
@@ -27,12 +27,12 @@ var demoRouteHandler = Handler(
   if (colorHex != null && colorHex.length > 0) {
     color = Color(ColorHelpers.fromHexString(colorHex));
   }
-  return DemoSimpleComponent(message: message, color: color, result: result);
+  return DemoSimpleComponent(message: message, color: color, result: result, include: arguments);
 });
 
 var demoFunctionHandler = Handler(
     type: HandlerType.function,
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    handlerFunc: (BuildContext context, Map<String, List<String>> params, Object arguments) {
       String message = params["message"]?.first;
       showDialog(
         context: context,
@@ -68,7 +68,7 @@ var demoFunctionHandler = Handler(
 ///
 /// `adb shell am start -W -a android.intent.action.VIEW -d "fluro://deeplink?path=/message&mesage=fluro%20rocks%21%21" com.theyakka.fluro`
 var deepLinkHandler = Handler(
-    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+    handlerFunc: (BuildContext context, Map<String, List<String>> params, Object arguments) {
   String colorHex = params["color_hex"]?.first;
   String result = params["result"]?.first;
   Color color = Color(0xFFFFFFFF);
