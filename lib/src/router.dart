@@ -135,14 +135,14 @@ class Router {
               settings: routeSettings,
               fullscreenDialog: transition == TransitionType.nativeModal,
               builder: (BuildContext context) {
-                return handler.handlerFunc(context, parameters);
+                return handler.handlerFunc(context, parameters, routeSettings.arguments);
               });
         } else {
           return MaterialPageRoute<dynamic>(
               settings: routeSettings,
               fullscreenDialog: transition == TransitionType.nativeModal,
               builder: (BuildContext context) {
-                return handler.handlerFunc(context, parameters);
+                return handler.handlerFunc(context, parameters, routeSettings.arguments);
               });
         }
       } else if (transition == TransitionType.material ||
@@ -152,7 +152,7 @@ class Router {
             fullscreenDialog:
                 transition == TransitionType.materialFullScreenDialog,
             builder: (BuildContext context) {
-              return handler.handlerFunc(context, parameters);
+              return handler.handlerFunc(context, parameters, routeSettings.arguments);
             });
       } else if (transition == TransitionType.cupertino ||
           transition == TransitionType.cupertinoFullScreenDialog) {
